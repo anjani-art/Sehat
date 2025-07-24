@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatPeduli - Aplikasi Kesehatan</title>
+    <meta name="description" content="Aplikasi PWA Kesehatan SehatPeduli oleh Saskia Bunga Anjani.">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="app-title">SehatPeduli</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Beranda</a></li>
+                <li><a href="#info-kesehatan">Informasi</a></li>
+                <li><a href="#tools">Alat Bantu</a></li>
+                <li><a href="#profile-settings">Profil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="page active">
+            <h1>Beranda</h1>
+            <div class="summary-card">
+                <h2>Ringkasan Kesehatan Harian</h2>
+                <p id="daily-health-summary">Memuat data...</p>
+            </div>
+            <div class="tip-card">
+                <h2>Tips Kesehatan Harian</h2>
+                <p id="daily-health-tip">Penuhi kebutuhan cairan harian Anda dengan minum air putih yang cukup. Ini membantu menjaga fungsi tubuh optimal dan energi sepanjang hari.</p>
+            </div>
+            <div class="quick-access-card">
+                <h2>Akses Cepat</h2>
+                <div id="quick-access-content">
+                    <p>Anda belum memiliki pengingat cepat. Tambahkan pengingat obat atau target air minum di bagian "Alat Bantu".</p>
+                </div>
+            </div>
+            <div class="featured-info-card">
+                <h2>Informasi Pilihan</h2>
+                <div class="featured-info-item">
+                    <h3>Manfaat Konsumsi Air Putih Cukup</h3>
+                    <p>Air putih sangat penting untuk hidrasi, pencernaan, dan kesehatan kulit. Pastikan Anda minum air yang cukup setiap hari.</p>
+                    <button class="navigate-btn" data-target="#info-kesehatan" data-info-id="1">Baca Lebih Lanjut</button>
+                </div>
+                <div class="featured-info-item">
+                    <h3>Panduan Olahraga Ringan di Rumah</h3>
+                    <p>Olahraga rutin di rumah dapat meningkatkan kebugaran tanpa perlu peralatan mahal. Mulailah dengan gerakan dasar seperti squat atau push-up.</p>
+                    <button class="navigate-btn" data-target="#info-kesehatan" data-info-id="2">Baca Lebih Lanjut</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="info-kesehatan" class="page">
+            <h1>Informasi Kesehatan</h1>
+            <div class="search-bar">
+                <input type="text" id="info-search" placeholder="Cari informasi...">
+                <button id="search-button" class="btn-primary">Cari</button>
+            </div>
+            <div class="info-categories">
+                <button class="category-filter active" data-category="all">Semua Kategori</button>
+                <button class="category-filter" data-category="nutrisi">Nutrisi Seimbang</button>
+                <button class="category-filter" data-category="gerak">Gerak Aktif</button>
+                <button class="category-filter" data-category="tidur">Kualitas Tidur</button>
+                <button class="category-filter" data-category="perawatan">Perawatan Diri</button>
+            </div>
+            <div class="info-list">
+                <div class="info-item" data-info-id="1" data-category="nutrisi">
+                    <h3>Manfaat Konsumsi Air Putih Cukup <span class="favorite-status"></span></h3>
+                    <p>Cukupan asupan air putih memegang peranan krusial bagi optimalnya fungsi tubuh secara menyeluruh, jauh melampaui sekadar pelepas dahaga. Dengan terhidrasi dengan baik, Anda membantu menjaga keseimbangan cairan tubuh yang vital untuk transportasi nutrisi, pengaturan suhu tubuh, dan pelumas sendi. Air adalah komponen utama darah dan berperan dalam membawa oksigen serta nutrisi penting ke sel-sel, sekaligus membantu membuang racun dan produk limbah metabolik melalui ginjal. Konsumsi air yang cukup juga mendukung fungsi kognitif yang optimal, meningkatkan konsentrasi, daya ingat, dan suasana hati, serta mencegah kelelahan. Bagi kesehatan fisik, air berkontribusi pada kulit yang sehat dan terhidrasi, mempercepat proses metabolisme yang penting untuk manajemen berat badan, dan membantu mencegah sembelit dengan melancarkan sistem pencernaan. Dengan demikian, minum air putih yang cukup setiap hari adalah investasi sederhana namun powerful untuk kesehatan jangka panjang dan kualitas hidup yang lebih baik.</p>
+                    <button class="info-detail-link btn-secondary" data-info-id="1">Baca Selengkapnya</button>
+                    <button class="add-to-favorite btn-link">Tambah ke Favorit</button>
+                </div>
+                <div class="info-item" data-info-id="2" data-category="gerak">
+                    <h3>Panduan Olahraga Ringan di Rumah <span class="favorite-status"></span></h3>
+                    <p>Tidak perlu ke gym, Anda bisa berolahraga ringan di rumah dengan efektif.Olahraga ringan di rumah adalah cara yang bagus untuk menjaga kebugaran tanpa perlu peralatan mahal atau pergi ke gym. Mulailah dengan pemanasan 5-10 menit seperti jalan di tempat atau peregangan dinamis. Kemudian, lakukan gerakan sederhana seperti squat, lunges, push-up (modifikasi lutut jika perlu), plank, dan jumping jack, masing-masing 10-15 repetisi atau tahan selama 30 detik, ulangi 2-3 set. Akhiri dengan pendinginan berupa peregangan statis untuk membantu pemulihan otot. Konsistensi adalah kunci, jadi usahakan berolahraga 3-4 kali seminggu, dan selalu dengarkan tubuh Anda untuk menghindari cedera.</p>
+                    <button class="info-detail-link btn-secondary" data-info-id="2">Baca Selengkapnya</button>
+                    <button class="add-to-favorite btn-link">Tambah ke Favorit</button>
+                </div>
+                <div class="info-item" data-info-id="3" data-category="tidur">
+                    <h3>Tips Meningkatkan Kualitas Tidur Anda <span class="favorite-status"></span></h3>
+                    <p>Tidur yang berkualitas penting untuk kesehatan fisik dan mental, ada beberapa langkah yang bisa Anda terapkan secara konsisten. Prioritaskan untuk menjaga jadwal tidur yang teratur, bahkan di akhir pekan, dan ciptakan lingkungan kamar tidur yang gelap, tenang, dan sejuk. Hindari kafein dan alkohol menjelang waktu tidur, serta batasi paparan layar gawai atau perangkat elektronik setidaknya satu jam sebelum Anda beranjak ke tempat tidur. Melakukan aktivitas relaksasi seperti membaca buku atau mandi air hangat juga dapat membantu mempersiapkan tubuh Anda untuk tidur nyenyak.</p>
+                    <button class="info-detail-link btn-secondary" data-info-id="3">Baca Selengkapnya</button>
+                    <button class="add-to-favorite btn-link">Tambah ke Favorit</button>
+                </div>
+                <div class="info-item" data-info-id="4" data-category="perawatan">
+                    <h3>Kebersihan Diri dan Lingkungan <span class="favorite-status"></span></h3>
+                    <p>Kesehatan optimal adalah aset berharga yang berakar kuat pada kebersihan, baik kebersihan diri maupun lingkungan di sekitar kita. Mencuci tangan dengan sabun, mandi teratur, dan menjaga kebersihan mulut adalah praktik personal vital yang menjadi perisai utama kita dari kuman dan infeksi. Sejalan dengan itu, menjaga kebersihan rumah—dengan rutin membersihkan permukaan, mengelola sampah, dan membersihkan area lembap seperti kamar mandi—serta tidak membuang sampah sembarangan di area publik, sangat krusial untuk mencegah penumpukan bakteri, virus, dan hama. Kedua aspek kebersihan ini saling melengkapi; kebersihan diri mencegah penyebaran kuman dari dan ke tubuh kita, sementara lingkungan yang bersih menciptakan ruang hidup yang sehat, secara sinergis membentuk benteng pertahanan terdepan kita melawan berbagai penyakit dan memastikan kualitas hidup yang lebih baik.</p>
+                    <button class="info-detail-link btn-secondary" data-info-id="4">Baca Selengkapnya</button>
+                    <button class="add-to-favorite btn-link">Tambah ke Favorit</button>
+                </div>
+            </div>
+
+            <div class="info-detail-view" style="display: none;">
+                <h2 id="detail-info-title"></h2>
+                <div id="detail-info-content"></div>
+                <button id="back-to-informasi" class="btn-secondary">Kembali ke Informasi</button>
+            </div>
+
+            <div class="myth-vs-fact">
+                <h2>Mitos vs. Fakta Kesehatan</h2>
+                <div class="myth-fact-item">
+                    <h3>Mitos: Minum obat antibiotik harus dihabiskan walau sudah sembuh.</h3>
+                    <p><strong>Fakta:</strong> Ya, antibiotik harus dihabiskan sesuai resep dokter meskipun gejala sudah mereda untuk mencegah resistensi antibiotik dan memastikan bakteri benar-benar mati.</p>
+                </div>
+                <div class="myth-fact-item">
+                    <h3>Mitos: Sarapan tidak penting jika ingin menurunkan berat badan.</h3>
+                    <p><strong>Fakta:</strong> Sarapan justru penting untuk metabolisme dan energi. Melewatkan sarapan bisa membuat Anda makan berlebihan di siang hari.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="page">
+            <h1>Alat Bantu Pribadi</h1>
+
+            <div class="tool-card">
+                <h2>Pelacak Air Minum</h2>
+                <p>Air Dikonsumsi Hari Ini: <span id="water-consumed">0</span> ml / <span id="water-target">2000</span> ml</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="water-progress-bar" style="width: 0%;"></div>
+                </div>
+                <button id="add-water-btn" class="btn-primary">Tambah Gelas (+250 ml)</button>
+            </div>
+
+            <div class="tool-card">
+                <h2>Pengingat Obat</h2>
+                <form id="add-medicine-form">
+                    <label for="medicine-name">Nama Obat:</label>
+                    <input type="text" id="medicine-name" placeholder="Paracetamol" required>
+                    <label for="medicine-dose">Dosis:</label>
+                    <input type="text" id="medicine-dose" placeholder="500mg" required>
+                    <label for="medicine-schedule">Jadwal (contoh: 08:00, 14:00, 20:00):</label>
+                    <input type="text" id="medicine-schedule" placeholder="08:00, 20:00" required>
+                    <button type="submit" class="btn-primary">Tambah Pengingat</button>
+                </form>
+                <h3>Pengingat Aktif:</h3>
+                <ul id="active-medicine-reminders">
+                    </ul>
+            </div>
+
+            <div class="tool-card">
+                <h2>Jurnal Mood Harian</h2>
+                <p>Bagaimana perasaan Anda hari ini?</p>
+                <div class="mood-selection">
+                    <span class="mood-emoji" data-mood="Senang">😊</span>
+                    <span class="mood-emoji" data-mood="Biasa">😐</span>
+                    <span class="mood-emoji" data-mood="Sedih">😔</span>
+                    <span class="mood-emoji" data-mood="Marah">😠</span>
+                    <span class="mood-emoji" data-mood="Lelah">😩</span>
+                </div>
+                <label for="mood-notes">Catatan Tambahan:</label>
+                <textarea id="mood-notes" placeholder="Tuliskan apa yang Anda rasakan..."></textarea>
+                <button id="save-mood-btn" class="btn-primary">Simpan Mood</button>
+                <h3>Riwayat Mood:</h3>
+                <ul id="mood-history">
+                    </ul>
+            </div>
+
+            <div class="tool-card">
+                <h2>Kalkulator Kesehatan Dasar</h2>
+                <h3>Kalkulator BMI</h3>
+                <label for="bmi-height">Tinggi Badan (cm):</label>
+                <input type="number" id="bmi-height" placeholder="170" required>
+                <label for="bmi-weight">Berat Badan (kg):</label>
+                <input type="number" id="bmi-weight" placeholder="65" required>
+                <button id="calculate-bmi-btn" class="btn-primary">Hitung BMI</button>
+                <p>BMI Anda: <span id="bmi-result">--</span> (<span id="bmi-category">--</span>)</p>
+
+                <h3>Estimasi Kebutuhan Kalori</h3>
+                <label for="calorie-age">Usia:</label>
+                <input type="number" id="calorie-age" placeholder="30" required>
+                <label for="calorie-gender">Jenis Kelamin:</label>
+                <select id="calorie-gender" required>
+                    <option value="male">Pria</option>
+                    <option value="female">Wanita</option>
+                </select>
+                <label for="calorie-height">Tinggi Badan (cm):</label>
+                <input type="number" id="calorie-height" placeholder="170" required>
+                <label for="calorie-weight">Berat Badan (kg):</label>
+                <input type="number" id="calorie-weight" placeholder="65" required>
+                <label for="calorie-activity">Tingkat Aktivitas:</label>
+                <select id="calorie-activity" required>
+                    <option value="sedentary">Sangat Rendah (jarang olahraga)</option>
+                    <option value="light">Rendah (olahraga 1-3 hari/minggu)</option>
+                    <option value="moderate">Sedang (olahraga 3-5 hari/minggu)</option>
+                    <option value="active">Tinggi (olahraga 6-7 hari/minggu)</option>
+                    <option value="very-active">Sangat Tinggi (olahraga intens setiap hari)</option>
+                </select>
+                <button id="calculate-calorie-btn" class="btn-primary">Hitung Kalori</button>
+                <p>Estimasi Kebutuhan Kalori Harian: <span id="calorie-result">--</span> kkal</p>
+            </div>
+
+            <div class="tool-card">
+                <h2>Kontak Darurat</h2>
+                <form id="add-contact-form">
+                    <label for="contact-name">Nama Kontak:</label>
+                    <input type="text" id="contact-name" placeholder="Nama Dokter" required>
+                    <label for="contact-number">Nomor Telepon:</label>
+                    <input type="tel" id="contact-number" placeholder="081234567890" required>
+                    <button type="submit" class="btn-primary">Tambah Kontak</button>
+                </form>
+                <ul id="emergency-contacts-list">
+                    </ul>
+            </div>
+        </section>
+
+        <section id="profile-settings" class="page">
+            <h1>Profil & Pengaturan</h1>
+
+            <div class="user-info-settings">
+                <h2>Informasi Pengguna</h2>
+                <label for="user-name">Nama:</label>
+                <input type="text" id="user-name" placeholder="Nama Lengkap">
+                <label for="user-dob">Tanggal Lahir:</label>
+                <input type="date" id="user-dob">
+                <label for="user-gender">Jenis Kelamin:</label>
+                <select id="user-gender">
+                    <option value="">Pilih</option>
+                    <option value="male">Pria</option>
+                    <option value="female">Wanita</option>
+                </select>
+                <button class="btn-secondary" id="save-user-info">Simpan Informasi</button>
+            </div>
+
+            <div class="daily-target-settings">
+                <h2>Atur Target Harian</h2>
+                <label for="set-water-target">Target Air Minum (ml):</label>
+                <input type="number" id="set-water-target" value="2000">
+                <button class="btn-secondary" id="save-water-target">Simpan Target Air</button>
+            </div>
+
+            <div class="about-app-section">
+                <h2>Tentang Aplikasi</h2>
+                <p><strong>Nama Aplikasi:</strong> SehatPeduli</p>
+                <p><strong>Versi:</strong> 1.0.0</p>
+                <p><strong>Pengembang:</strong> Saskia Bunga Anjani</p>
+                <p><strong>Kontak:</strong> info@sehatpeduli.com</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SehatPeduli oleh Saskia Bunga Anjani</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="service-worker.js"></script>
+</body>
+                      </html>
+  
