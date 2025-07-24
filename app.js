@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     appTitle.addEventListener('click', () => {
         showPage('home');
- });
+});
 
     // Handle navigation from informasi links
     document.querySelectorAll('.navigate-btn').forEach(button => {
@@ -40,239 +40,248 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = e.target.dataset.target.substring(1);
             showPage(targetId);
             // If it's an informasi link, also show the specific informasi
-            if (e.target.dataset.articleId) {
+            if (e.target.dataset.articleId) { // This still expects data-article-id from the HTML
   
                const articleId = e.target.dataset.articleId;
                 showInformasiDetail(articleId); // Changed from showArticleDetail
+            } else if (e.target.dataset.infoId) { // Added to handle data-info-id from Home's featured info
+                const infoId = e.target.dataset.infoId;
+                showInformasiDetail(infoId);
             }
         });
     });
- // Initial page load
+// Initial page load
     showPage('home');
 
     // --- Home Page Functionality ---
     const dailyHealthSummary = document.getElementById('daily-health-summary');
- const dailyHealthTip = document.getElementById('daily-health-tip');
+const dailyHealthTip = document.getElementById('daily-health-tip');
     const quickAccessContent = document.getElementById('quick-access-content');
 
     function updateHomePage() {
         // Daily Health Summary - Placeholder, could be dynamic based on user input
         dailyHealthSummary.textContent = "Data kesehatan harian Anda akan muncul di sini setelah Anda mulai menggunakan alat bantu!";
- // Daily Health Tip - Loaded from HTML, but could be dynamic
+// Daily Health Tip - Loaded from HTML, but could be dynamic
         // dailyHealthTip.textContent is already set in the HTML
 
         // Quick Access - Placeholder for reminders
-        [span_0](start_span)quickAccessContent.innerHTML = '<p>Anda belum memiliki pengingat cepat.[span_0](end_span)[span_1](start_span)Tambahkan pengingat obat atau target air minum di bagian "Alat Bantu".[span_1](end_span)</p>';
- // Update with actual reminders if available (e.g., from medicine reminders)
+        quickAccessContent.innerHTML = '<p>Anda belum memiliki pengingat cepat.Tambahkan pengingat obat atau target air minum di bagian "Alat Bantu".</p>';
+// Update with actual reminders if available (e.g., from medicine reminders)
         const activeMedicineReminders = JSON.parse(localStorage.getItem('medicineReminders') || '[]');
- if (activeMedicineReminders.length > 0) {
+if (activeMedicineReminders.length > 0) {
             let remindersHtml = '<h3>Pengingat Aktif:</h3><ul>';
- activeMedicineReminders.forEach(reminder => {
+activeMedicineReminders.forEach(reminder => {
                 remindersHtml += `<li>Obat: ${reminder.name}, Dosis: ${reminder.dose}, Jadwal: ${reminder.schedule}</li>`;
             });
- remindersHtml += '</ul>';
+remindersHtml += '</ul>';
             quickAccessContent.innerHTML = remindersHtml;
         }
     }
     updateHomePage();
- // Call on initial load
+// Call on initial load
 
     // --- Informasi Kesehatan (Informasi) Functionality ---
-    const informasiSearchInput = document.getElementById('informasi-search'); // Changed from article-search
+    const informasiSearchInput = document.getElementById('info-search'); // Changed from 'informasi-search' to 'info-search'
  const searchButton = document.getElementById('search-button');
     const categoryFilters = document.querySelectorAll('.category-filter');
-    const informasiList = document.querySelector('.informasi-list'); // Changed from article-list
-    const informasiDetailView = document.getElementById('informasi-detail-view'); // Changed from article-detail-view
-    const detailInformasiTitle = document.getElementById('detail-informasi-title'); // Changed from detail-article-title
- const detailInformasiContent = document.getElementById('detail-informasi-content'); // Changed from detail-article-content
-    const backToInformasisBtn = document.getElementById('back-to-informasis'); // Changed from back-to-articles
+    const informasiList = document.querySelector('.info-list'); // Changed from '.informasi-list' to '.info-list'
+    const informasiDetailView = document.getElementById('info-detail-view'); // Changed from 'informasi-detail-view' to 'info-detail-view'
+    const detailInformasiTitle = document.getElementById('detail-info-title'); // Changed from 'detail-informasi-title' to 'detail-info-title'
+ const detailInformasiContent = document.getElementById('detail-info-content'); // Changed from 'detail-informasi-content' to 'detail-info-content'
+    const backToInformasisBtn = document.getElementById('back-to-informasi'); // Changed from 'back-to-informasis' to 'back-to-informasi'
     const favoriteButtons = document.querySelectorAll('.add-to-favorite');
- let informasisData = [ // Changed from articlesData
+let informasisData = [
         {
             id: '1',
             title: 'Manfaat Konsumsi Air Putih Cukup',
             category: 'nutrisi',
-            [span_2](start_span)content: 'Cukupan asupan air putih memegang peranan krusial bagi optimalnya fungsi tubuh secara menyeluruh, jauh melampaui sekadar pelepas dahaga.[span_2](end_span)[span_3](start_span)Dengan terhidrasi dengan baik, Anda membantu menjaga keseimbangan cairan tubuh yang vital untuk transportasi nutrisi, pengaturan suhu tubuh, dan pelumas sendi.[span_3](end_span)[span_4](start_span)Air adalah komponen utama darah dan berperan dalam membawa oksigen serta nutrisi penting ke sel-sel, sekaligus membantu membuang racun dan produk limbah metabolik melalui ginjal.[span_4](end_span)[span_5](start_span)Konsumsi air yang cukup juga mendukung fungsi kognitif yang optimal, meningkatkan konsentrasi, daya ingat, dan suasana hati, serta mencegah kelelahan.[span_5](end_span)[span_6](start_span)Bagi kesehatan fisik, air berkontribusi pada kulit yang sehat dan terhidrasi, mempercepat proses metabolisme yang penting untuk manajemen berat badan, dan membantu mencegah sembelit dengan melancarkan sistem pencernaan.[span_6](end_span)[span_7](start_span)Dengan demikian, minum air putih yang cukup setiap hari adalah investasi sederhana namun powerful untuk kesehatan jangka panjang dan kualitas hidup yang lebih baik.'[span_7](end_span)
+            content: 'Cukupan asupan air putih memegang peranan krusial bagi optimalnya fungsi tubuh secara menyeluruh, jauh melampaui sekadar pelepas dahaga.Dengan terhidrasi dengan baik, Anda membantu menjaga keseimbangan cairan tubuh yang vital 
+ untuk transportasi nutrisi, pengaturan suhu tubuh, dan pelumas sendi.Air adalah komponen utama darah dan berperan dalam membawa oksigen serta nutrisi penting ke sel-sel, sekaligus membantu membuang racun dan produk limbah metabolik melalui ginjal.Konsumsi air yang cukup juga mendukung fungsi kognitif yang optimal, meningkatkan konsentrasi, daya ingat, dan suasana hati, serta mencegah kelelahan.Bagi kesehatan fisik, air berkontribusi pada kulit yang sehat dan terhidrasi, mempercepat proses metabolisme yang penting untuk manajemen berat badan, dan membantu mencegah sembelit dengan melancarkan sistem pencernaan.Dengan demikian, minum air putih yang cukup setiap hari adalah investasi sederhana namun powerful untuk kesehatan jangka panjang dan kualitas hidup yang 
+ lebih baik.'
  },
         {
             id: '2',
             title: 'Panduan Olahraga Ringan di Rumah',
             category: 'gerak',
-            [span_8](start_span)content: 'Tidak perlu ke gym, Anda bisa berolahraga ringan di rumah dengan efektif.Olahraga ringan di rumah adalah cara yang bagus untuk menjaga kebugaran tanpa perlu peralatan mahal atau pergi ke gym.[span_8](end_span)[span_9](start_span)Mulailah dengan pemanasan 5-10 menit seperti jalan di tempat atau peregangan dinamis.[span_9](end_span)[span_10](start_span)Kemudian, lakukan gerakan sederhana seperti squat, lunges, push-up (modifikasi lutut jika perlu), plank, dan jumping jack, masing-masing 10-15 repetisi atau tahan selama 30 detik, ulangi 2-3 set.[span_10](end_span)[span_11](start_span)Akhiri dengan pendinginan berupa peregangan statis untuk membantu pemulihan otot.[span_11](end_span)[span_12](start_span)Konsistensi adalah kunci, jadi usahakan berolahraga 3-4 kali seminggu, dan selalu dengarkan tubuh Anda untuk menghindari cedera.'[span_12](end_span)
+            content: 'Tidak perlu ke gym, Anda bisa berolahraga ringan di rumah dengan efektif.Olahraga ringan di rumah adalah cara yang bagus untuk menjaga kebugaran tanpa perlu peralatan mahal atau pergi ke gym.Mulailah dengan pemanasan 5-10 menit 
+ seperti jalan di tempat atau peregangan dinamis.Kemudian, lakukan gerakan sederhana seperti squat, lunges, push-up (modifikasi lutut jika perlu), plank, dan jumping jack, masing-masing 10-15 repetisi atau tahan selama 30 detik, ulangi 2-3 set.Akhiri dengan pendinginan berupa peregangan statis untuk membantu pemulihan otot.Konsistensi adalah kunci, jadi usahakan berolahraga 3-4 kali seminggu, dan selalu dengarkan tubuh Anda untuk menghindari cedera.'
  },
         {
             id: '3',
             title: 'Tips Meningkatkan Kualitas Tidur Anda',
+    
             category: 'tidur',
-            [span_13](start_span)content: 'Tidur yang berkualitas penting untuk kesehatan fisik dan mental, ada beberapa langkah yang bisa Anda terapkan secara konsisten.[span_13](end_span)[span_14](start_span)Prioritaskan untuk menjaga jadwal tidur yang teratur, bahkan di akhir pekan, dan ciptakan lingkungan kamar tidur yang gelap, tenang, dan sejuk.[span_14](end_span)[span_15](start_span)Hindari kafein dan alkohol menjelang waktu tidur, serta batasi paparan layar gawai atau perangkat elektronik setidaknya satu jam sebelum Anda beranjak ke tempat tidur.[span_15](end_span)[span_16](start_span)Melakukan aktivitas relaksasi seperti membaca buku atau mandi air hangat juga dapat membantu mempersiapkan tubuh Anda untuk tidur nyenyak.'[span_16](end_span)
+            content: 'Tidur yang berkualitas penting untuk kesehatan fisik dan mental, ada beberapa langkah yang bisa Anda terapkan secara konsisten.Prioritaskan untuk menjaga jadwal tidur yang teratur, bahkan di akhir pekan, dan ciptakan lingkungan kamar tidur yang gelap, tenang, dan sejuk.Hindari kafein dan alkohol menjelang waktu tidur, serta batasi paparan layar gawai atau perangkat elektronik setidaknya satu jam sebelum Anda beranjak ke tempat tidur.Melakukan aktivitas relaksasi seperti membaca buku atau mandi air hangat juga dapat membantu mempersiapkan tubuh Anda untuk tidur 
+ nyenyak.'
  },
         {
             id: '4',
             title: 'Kebersihan Diri dan Lingkungan',
             category: 'perawatan',
-            [span_17](start_span)content: 'Kesehatan optimal adalah aset berharga yang berakar kuat pada kebersihan, baik kebersihan diri maupun lingkungan di sekitar kita.[span_17](end_span)[span_18](start_span)Mencuci tangan dengan sabun, mandi teratur, dan menjaga kebersihan mulut adalah praktik personal vital yang menjadi perisai utama kita dari kuman dan infeksi.[span_18](end_span)[span_19](start_span)Sejalan dengan itu, menjaga kebersihan rumah—dengan rutin membersihkan permukaan, mengelola sampah, dan membersihkan area lembap seperti kamar mandi—serta tidak membuang sampah sembarangan di area publik, sangat krusial untuk mencegah penumpukan bakteri, virus, dan hama.[span_19](end_span)[span_20](start_span)Kedua aspek kebersihan ini saling melengkapi; kebersihan diri mencegah penyebaran kuman dari dan ke tubuh kita, sementara lingkungan yang bersih menciptakan ruang hidup yang sehat, secara sinergis membentuk benteng pertahanan terdepan kita melawan berbagai penyakit dan memastikan kualitas hidup yang lebih baik.'[span_20](end_span)
+            content: 'Kesehatan optimal adalah aset berharga yang berakar kuat pada kebersihan, baik kebersihan diri maupun lingkungan di sekitar kita.Mencuci tangan dengan sabun, mandi teratur, dan menjaga kebersihan mulut adalah praktik personal vital yang menjadi perisai utama kita 
+ dari kuman dan infeksi.Sejalan dengan itu, menjaga kebersihan rumahâ��dengan rutin membersihkan permukaan, mengelola sampah, dan membersihkan area lembap seperti kamar mandiâ��serta tidak membuang sampah sembarangan di area publik, sangat krusial untuk mencegah penumpukan bakteri, virus, dan hama.Kedua aspek kebersihan ini saling melengkapi;
+ kebersihan diri mencegah penyebaran kuman dari dan ke tubuh kita, sementara lingkungan yang bersih menciptakan ruang hidup yang sehat, secara sinergis membentuk benteng pertahanan terdepan kita melawan berbagai penyakit dan memastikan kualitas hidup yang lebih baik.'
  }
     ];
-
-    function renderInformasis(filterCategory = 'all', searchTerm = '') { // Changed from renderArticles
-        const informasiItems = document.querySelectorAll('.informasi-item'); // Changed from article-item
- informasiItems.forEach(item => {
+function renderInformasis(filterCategory = 'all', searchTerm = '') {
+        const informasiItems = document.querySelectorAll('.info-item'); // Changed from '.informasi-item' to '.info-item'
+informasiItems.forEach(item => {
             const informasiCategory = item.dataset.category;
             const informasiTitle = item.querySelector('h3').textContent.toLowerCase();
             const informasiContent = item.querySelector('p').textContent.toLowerCase();
             const matchesCategory = filterCategory === 'all' || informasiCategory === filterCategory;
             const matchesSearch = searchTerm === '' || informasiTitle.includes(searchTerm) || informasiContent.includes(searchTerm);
 
-           
+       
+    
   if (matchesCategory && matchesSearch) {
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
             }
         });
- }
+}
 
     // Initial render
-    renderInformasis(); // Changed from renderArticles
+    renderInformasis();
  searchButton.addEventListener('click', () => {
         const searchTerm = informasiSearchInput.value.toLowerCase();
         const activeCategory = document.querySelector('.category-filter.active').dataset.category;
-        renderInformasis(activeCategory, searchTerm); // Changed from renderArticles
+        renderInformasis(activeCategory, searchTerm);
     });
- informasiSearchInput.addEventListener('keyup', (e) => { // Changed from articleSearchInput
+informasiSearchInput.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
             searchButton.click();
         }
     });
- categoryFilters.forEach(filter => {
+categoryFilters.forEach(filter => {
         filter.addEventListener('click', (e) => {
             e.preventDefault();
             categoryFilters.forEach(f => f.classList.remove('active'));
             e.target.classList.add('active');
             const filterCategory = e.target.dataset.category;
-            const searchTerm = informasiSearchInput.value.toLowerCase(); // Changed from articleSearchInput
-            renderInformasis(filterCategory, searchTerm); // Changed from renderArticles
+            const searchTerm = informasiSearchInput.value.toLowerCase();
+            renderInformasis(filterCategory, searchTerm);
       
     });
     });
-
-    document.querySelectorAll('.informasi-detail-link').forEach(link => { // Changed from article-detail-link
+document.querySelectorAll('.info-detail-link').forEach(link => { // Changed from '.informasi-detail-link' to '.info-detail-link'
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const informasiId = e.target.dataset.articleId; // Retained dataset name for compatibility
-            showInformasiDetail(informasiId); // Changed from showArticleDetail
+            const informasiId = e.target.dataset.infoId; // Changed from 'data-article-id' to 'data-info-id'
+            showInformasiDetail(informasiId);
         });
     });
- function showInformasiDetail(informasiId) { // Changed from showArticleDetail
-        const informasi = informasisData.find(a => a.id === informasiId); // Changed from article and articlesData
+function showInformasiDetail(informasiId) {
+        const informasi = informasisData.find(a => a.id === informasiId);
  if (informasi) {
-            detailInformasiTitle.textContent = informasi.title; // Changed from detailArticleTitle and article
-            detailInformasiContent.innerHTML = `<p>${informasi.content}</p>`; // Changed from detailArticleContent and article
- informasiList.style.display = 'none'; // Changed from articleList
+            detailInformasiTitle.textContent = informasi.title;
+            detailInformasiContent.innerHTML = `<p>${informasi.content}</p>`;
+informasiList.style.display = 'none';
             document.querySelector('.search-bar').style.display = 'none';
-            document.querySelector('.informasi-categories').style.display = 'none'; // Changed from article-categories
+document.querySelector('.info-categories').style.display = 'none'; // Changed from '.informasi-categories' to '.info-categories'
             document.querySelector('.myth-vs-fact').style.display = 'none';
-            informasiDetailView.style.display = 'block'; // Changed from articleDetailView
+informasiDetailView.style.display = 'block';
             window.scrollTo(0, 0);
- // Scroll to top for better viewing
         }
     }
 
-    backToInformasisBtn.addEventListener('click', () => { // Changed from backToArticlesBtn
-        informasiDetailView.style.display = 'none'; // Changed from articleDetailView
-        informasiList.style.display = 'block'; // Changed from articleList
+    backToInformasisBtn.addEventListener('click', () => {
+        informasiDetailView.style.display = 'none';
+        informasiList.style.display = 'block';
         document.querySelector('.search-bar').style.display = 'flex';
-        document.querySelector('.informasi-categories').style.display = 'block'; // Changed from article-categories
+        document.querySelector('.info-categories').style.display = 'block'; // Changed from '.informasi-categories' to '.info-categories'
         document.querySelector('.myth-vs-fact').style.display = 'block';
-        detailInformasiTitle.textContent = ''; // Changed from detailArticleTitle
-        detailInformasiContent.innerHTML = ''; // Changed from detailArticleContent
+        detailInformasiTitle.textContent 
+= '';
+        detailInformasiContent.innerHTML = '';
     });
- // Favorite informasis (using localStorage)
-    let favoriteInformasis = JSON.parse(localStorage.getItem('favoriteInformasis') || '[]'); // Changed from favoriteArticles
- function updateFavoriteStatus(informasiId, isFavorite) { // Changed from updateFavoriteStatus and articleId
-        const informasiItem = document.querySelector(`.informasi-item[data-article-id="${informasiId}"]`); // Changed from article-item; kept data-article-id for compatibility
+// Favorite informasis (using localStorage)
+    let favoriteInformasis = JSON.parse(localStorage.getItem('favoriteInformasis') || '[]');
+ function updateFavoriteStatus(informasiId, isFavorite) {
+        const informasiItem = document.querySelector(`.info-item[data-info-id="${informasiId}"]`); // Changed from '.informasi-item' and 'data-article-id' to '.info-item' and 'data-info-id'
  if (informasiItem) {
             const statusSpan = informasiItem.querySelector('.favorite-status');
- const button = informasiItem.querySelector('.add-to-favorite');
+const button = informasiItem.querySelector('.add-to-favorite');
             if (isFavorite) {
                 statusSpan.textContent = ' (Favorit)';
- button.textContent = 'Hapus dari Favorit';
+button.textContent = 'Hapus dari Favorit';
             } else {
                 statusSpan.textContent = '';
- button.textContent = 'Tambah ke Favorit';
+button.textContent = 'Tambah ke Favorit';
             }
         }
     }
 
     favoriteButtons.forEach(button => {
-        const informasiItem = button.closest('.informasi-item'); // Changed from article-item
-        const informasiId = informasiItem.dataset.articleId; // Kept dataset name for compatibility
+        const informasiItem = button.closest('.info-item'); // Changed from '.informasi-item' to '.info-item'
+        const informasiId = informasiItem.dataset.infoId; // Changed from 'data-article-id' to 'data-info-id'
         const isCurrentlyFavorite = favoriteInformasis.includes(informasiId);
         updateFavoriteStatus(informasiId, isCurrentlyFavorite);
 
         button.addEventListener('click', () => {
-            const index = favoriteInformasis.indexOf(informasiId);
+            const index 
+= favoriteInformasis.indexOf(informasiId);
          
     if (index > -1) {
                 // Already in favorites, remove it
                 favoriteInformasis.splice(index, 1);
                 updateFavoriteStatus(informasiId, false);
             } else {
-                // Not in favorites, add it
+             
+    // Not in favorites, add it
    
               favoriteInformasis.push(informasiId);
                 updateFavoriteStatus(informasiId, true);
             }
-            localStorage.setItem('favoriteInformasis', JSON.stringify(favoriteInformasis)); // Changed from favoriteArticles
+            localStorage.setItem('favoriteInformasis', JSON.stringify(favoriteInformasis));
         });
-    });
+});
  // --- Tools Page Functionality ---
 
     // Water Tracker
     const waterConsumedSpan = document.getElementById('water-consumed');
- const waterProgressBar = document.getElementById('water-progress-bar');
+const waterProgressBar = document.getElementById('water-progress-bar');
     const addWaterBtn = document.getElementById('add-water-btn');
     const waterTargetSpan = document.getElementById('water-target');
     let waterConsumed = parseInt(localStorage.getItem('waterConsumed') || '0');
- let waterTarget = parseInt(localStorage.getItem('waterTarget') || '2000'); // Default 2000 ml
+let waterTarget = parseInt(localStorage.getItem('waterTarget') || '2000'); // Default 2000 ml
 
     function updateWaterTracker() {
         waterConsumedSpan.textContent = waterConsumed;
- waterTargetSpan.textContent = waterTarget;
+waterTargetSpan.textContent = waterTarget;
         const progress = (waterConsumed / waterTarget) * 100;
         waterProgressBar.style.width = `${Math.min(100, progress)}%`;
- if (waterConsumed >= waterTarget) {
+if (waterConsumed >= waterTarget) {
             waterProgressBar.style.backgroundColor = '#28a745';
- // Green when target met
         } else {
             waterProgressBar.style.backgroundColor = '#007bff';
- // Blue otherwise
         }
         localStorage.setItem('waterConsumed', waterConsumed);
- }
+}
 
     addWaterBtn.addEventListener('click', () => {
         waterConsumed += 250; // Add 250 ml per click
         updateWaterTracker();
     });
- // Reset water consumed daily (for a real app, this would be handled by a date check)
+// Reset water consumed daily (for a real app, this would be handled by a date check)
     // For demonstration, we can simulate a reset or add a manual reset button
     // For now, it will persist until manually cleared or new day logic is added.
- updateWaterTracker(); // Initial update
+updateWaterTracker(); // Initial update
 
     // Medicine Reminders
     const addMedicineForm = document.getElementById('add-medicine-form');
- const medicineNameInput = document.getElementById('medicine-name');
+const medicineNameInput = document.getElementById('medicine-name');
     const medicineDoseInput = document.getElementById('medicine-dose');
     const medicineScheduleInput = document.getElementById('medicine-schedule');
     const activeMedicineRemindersList = document.getElementById('active-medicine-reminders');
- let medicineReminders = JSON.parse(localStorage.getItem('medicineReminders') || '[]');
+let medicineReminders = JSON.parse(localStorage.getItem('medicineReminders') || '[]');
 
     function renderMedicineReminders() {
         activeMedicineRemindersList.innerHTML = '';
- if (medicineReminders.length === 0) {
+if (medicineReminders.length === 0) {
             activeMedicineRemindersList.innerHTML = '<p>Belum ada pengingat obat aktif.</p>';
- } else {
+} else {
             medicineReminders.forEach((reminder, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
@@ -282,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 activeMedicineRemindersList.appendChild(li);
             });
- }
+}
         updateHomePage(); // Update quick access on home page
     }
 
@@ -302,11 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
             medicineScheduleInput.value = '';
             alert('Pengingat obat berhasil ditambahkan!');
         } else {
-        
+       
      alert('Harap isi semua kolom untuk pengingat obat.');
         }
     });
- activeMedicineRemindersList.addEventListener('click', (e) => {
+activeMedicineRemindersList.addEventListener('click', (e) => {
         if (e.target.classList.contains('delete-medicine-reminder')) {
             const indexToDelete = parseInt(e.target.dataset.index);
             medicineReminders.splice(indexToDelete, 1);
@@ -314,27 +323,27 @@ document.addEventListener('DOMContentLoaded', () => {
             renderMedicineReminders();
         }
     });
- renderMedicineReminders(); // Initial render
+renderMedicineReminders(); // Initial render
 
     // Mood Journal
     const moodEmojis = document.querySelectorAll('.mood-emoji');
- const moodNotesInput = document.getElementById('mood-notes');
+const moodNotesInput = document.getElementById('mood-notes');
     const saveMoodBtn = document.getElementById('save-mood-btn');
     const moodHistoryList = document.getElementById('mood-history');
     let selectedMood = '';
- let moodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
+let moodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
 
     function renderMoodHistory() {
         moodHistoryList.innerHTML = '';
- if (moodHistory.length === 0) {
+if (moodHistory.length === 0) {
             moodHistoryList.innerHTML = '<p>Belum ada catatan mood.</p>';
- } else {
+} else {
             moodHistory.forEach(entry => {
                 const li = document.createElement('li');
                 li.textContent = `${new Date(entry.timestamp).toLocaleString()}: ${entry.mood} - ${entry.notes}`;
                 moodHistoryList.appendChild(li);
             });
- }
+}
     }
 
     moodEmojis.forEach(emoji => {
@@ -344,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedMood = emoji.dataset.mood;
         });
     });
- saveMoodBtn.addEventListener('click', () => {
+saveMoodBtn.addEventListener('click', () => {
         if (selectedMood) {
             const notes = moodNotesInput.value.trim();
             moodHistory.unshift({ // Add to the beginning for reverse chronological order
@@ -359,22 +368,22 @@ document.addEventListener('DOMContentLoaded', () => {
             moodNotesInput.value = '';
             moodEmojis.forEach(e => e.classList.remove('selected'));
             alert('Mood berhasil disimpan!');
-  
+ 
         } else {
             alert('Harap pilih mood Anda sebelum menyimpan.');
         }
     });
- renderMoodHistory(); // Initial render
+renderMoodHistory(); // Initial render
 
     // Basic Health Calculators
 
     // BMI Calculator
     const bmiHeightInput = document.getElementById('bmi-height');
- const bmiWeightInput = document.getElementById('bmi-weight');
+const bmiWeightInput = document.getElementById('bmi-weight');
     const calculateBmiBtn = document.getElementById('calculate-bmi-btn');
     const bmiResultSpan = document.getElementById('bmi-result');
     const bmiCategorySpan = document.getElementById('bmi-category');
- calculateBmiBtn.addEventListener('click', () => {
+calculateBmiBtn.addEventListener('click', () => {
         const heightCm = parseFloat(bmiHeightInput.value);
         const weightKg = parseFloat(bmiWeightInput.value);
 
@@ -392,7 +401,8 @@ document.addEventListener('DOMContentLoaded', () => {
             category = 'Kekurangan Berat Badan';
         } else if (bmi >= 18.5 && bmi < 24.9) {
             category = 'Berat Badan Normal';
-        } else if (bmi >= 25 && 
+        } else if (bmi >= 25 
+&& 
  bmi < 29.9) {
             category = 'Kelebihan Berat Badan';
         } else {
@@ -402,15 +412,15 @@ document.addEventListener('DOMContentLoaded', () => {
         bmiResultSpan.textContent = bmi.toFixed(2);
         bmiCategorySpan.textContent = category;
     });
- // Estimated Calorie Needs Calculator
+// Estimated Calorie Needs Calculator
     const calorieAgeInput = document.getElementById('calorie-age');
     const calorieGenderSelect = document.getElementById('calorie-gender');
     const calorieHeightInput = document.getElementById('calorie-height');
- const calorieWeightInput = document.getElementById('calorie-weight');
+const calorieWeightInput = document.getElementById('calorie-weight');
     const calorieActivitySelect = document.getElementById('calorie-activity');
     const calculateCalorieBtn = document.getElementById('calculate-calorie-btn');
     const calorieResultSpan = document.getElementById('calorie-result');
- calculateCalorieBtn.addEventListener('click', () => {
+calculateCalorieBtn.addEventListener('click', () => {
         const age = parseInt(calorieAgeInput.value);
         const gender = calorieGenderSelect.value;
         const heightCm = parseFloat(calorieHeightInput.value);
@@ -429,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (gender === 'male') {
             bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
         } else { // female
-  
+ 
            bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
         }
 
@@ -437,39 +447,40 @@ document.addEventListener('DOMContentLoaded', () => {
         switch (activityLevel) {
             case 'sedentary':
                 activityFactor = 1.2;
-                break;
+                
+break;
  case 'light':
                 activityFactor = 1.375;
- break;
+break;
             case 'moderate':
                 activityFactor = 1.55;
- break;
+break;
             case 'active':
                 activityFactor = 1.725;
- break;
+break;
             case 'very-active':
                 activityFactor = 1.9;
- break;
+break;
             default:
                 activityFactor = 1.2;
- }
+}
 
         const tdee = bmr * activityFactor;
- // Total Daily Energy Expenditure
+// Total Daily Energy Expenditure
         calorieResultSpan.textContent = tdee.toFixed(0);
     });
- // Emergency Contacts
+// Emergency Contacts
     const addContactForm = document.getElementById('add-contact-form');
     const contactNameInput = document.getElementById('contact-name');
     const contactNumberInput = document.getElementById('contact-number');
- const emergencyContactsList = document.getElementById('emergency-contacts-list');
+const emergencyContactsList = document.getElementById('emergency-contacts-list');
 
     let emergencyContacts = JSON.parse(localStorage.getItem('emergencyContacts') || '[]');
- function renderEmergencyContacts() {
+function renderEmergencyContacts() {
         emergencyContactsList.innerHTML = '';
- if (emergencyContacts.length === 0) {
+if (emergencyContacts.length === 0) {
             emergencyContactsList.innerHTML = '<p>Belum ada kontak darurat yang disimpan.</p>';
- } else {
+} else {
             emergencyContacts.forEach((contact, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
@@ -479,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 emergencyContactsList.appendChild(li);
             });
- }
+}
     }
 
     addContactForm.addEventListener('submit', (e) => {
@@ -499,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Harap isi nama dan nomor telepon kontak.');
         }
     });
- emergencyContactsList.addEventListener('click', (e) => {
+emergencyContactsList.addEventListener('click', (e) => {
         if (e.target.classList.contains('delete-contact-btn')) {
             const indexToDelete = parseInt(e.target.dataset.index);
             emergencyContacts.splice(indexToDelete, 1);
@@ -507,21 +518,21 @@ document.addEventListener('DOMContentLoaded', () => {
             renderEmergencyContacts();
         }
     });
- renderEmergencyContacts(); // Initial render
+renderEmergencyContacts(); // Initial render
 
     // --- Profile & Settings Functionality ---
 
     // User Information
     const userNameInput = document.getElementById('user-name');
- const userDobInput = document.getElementById('user-dob');
+const userDobInput = document.getElementById('user-dob');
     const userGenderSelect = document.getElementById('user-gender');
     const saveUserInfoBtn = document.getElementById('save-user-info');
 
     let userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
- function loadUserInfo() {
+function loadUserInfo() {
         userNameInput.value = userInfo.name || '';
         userDobInput.value = userInfo.dob || '';
- userGenderSelect.value = userInfo.gender || '';
+userGenderSelect.value = userInfo.gender || '';
     }
 
     saveUserInfoBtn.addEventListener('click', () => {
@@ -531,15 +542,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
         alert('Informasi pengguna berhasil disimpan!');
     });
- loadUserInfo(); // Initial load
+loadUserInfo(); // Initial load
 
     // Set Daily Water Target
     const setWaterTargetInput = document.getElementById('set-water-target');
- const saveWaterTargetBtn = document.getElementById('save-water-target');
+const saveWaterTargetBtn = document.getElementById('save-water-target');
 
     // Initialize the input with the current target from localStorage or default
     setWaterTargetInput.value = waterTarget;
- saveWaterTargetBtn.addEventListener('click', () => {
+saveWaterTargetBtn.addEventListener('click', () => {
         const newTarget = parseInt(setWaterTargetInput.value);
         if (!isNaN(newTarget) && newTarget > 0) {
             waterTarget = newTarget;
@@ -551,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Harap masukkan target air minum yang valid (angka positif).');
         }
     });
- // Service Worker Registration for PWA features
+// Service Worker Registration for PWA features
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('/service-worker.js')
@@ -563,7 +574,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('ServiceWorker registration failed: ', err);
                 });
         });
- }
+}
 });
 
 
+                
